@@ -1,0 +1,23 @@
+.img-container {
+    margin-top: 80px;
+  }
+  
+  .textfield-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .welcome-text {
+    color: #2E3339;
+    font-weight: 700 !important;
+  }
+  
+  .no-account-text {
+    font-size: 14px;
+    font-weight: 500 !important;
+    color: #2E3339;
+  }
+  
+  
