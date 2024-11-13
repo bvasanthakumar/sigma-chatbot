@@ -1,6 +1,7 @@
 import * as React from 'react';
 import logo from '../../assets/logo.png';
 import sample from '../../assets/sample.png';
+import axios from 'axios';
 
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -52,6 +53,7 @@ const Home = () => {
     const [open, setOpen] = React.useState(true);
     const [selectedIndex, setSelectedIndex] = React.useState(null);
     const [showSuggestions, setShowSuggestions] = React.useState(true);
+    const [UserInput,setUserInput]=React.useState("");
     const [conversation, setConversation] = React.useState([
         {
             id: 1,
@@ -90,7 +92,33 @@ const Home = () => {
         setSelectedIndex(null)
     }
 
-    const handleSend = () => {}
+    const handleSend = () => {
+        console.log(UserInput)
+        let data = JSON.stringify({
+            "question": UserInput
+          });
+          console.log(UserInput)
+          
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'http://127.0.0.1:5000/api/query',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          setShowSuggestions(false);
+          
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -355,9 +383,12 @@ const Home = () => {
                         <InputBase
                             sx={{ ml: 1, flex: 1 }}
                             placeholder="Type your message here..."
+                            onChange={(event) => {
+                                setUserInput(event.target.value);
+                              }}
                         />
                         <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                        <IconButton onClick={handleSend} sx={{
+                        <IconButton onClick={()=>handleSend()} sx={{
                             p: '10px', mx: '10px', my: 1, background: '#344A9A', color: '#fff', height: '30px', width: '30px', borderRadius: '8px',
                             '&:hover': { background: '#344A9A', color: '#fff', }
                         }}>
