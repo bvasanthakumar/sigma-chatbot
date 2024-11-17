@@ -6,10 +6,14 @@ import React from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import MicrosoftIcon from '@mui/icons-material/Microsoft';
 import './login.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = React.useState(false);
+    const navigate = useNavigate();
+
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -40,6 +44,11 @@ const Login = () => {
         color: '#2E3339', // Customize text color
         whiteSpace: 'nowrap',
     };
+
+    const onsubmit = ()=>{
+        navigate('/home');
+
+    }
 
     return (
         <div className="login-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
@@ -79,7 +88,7 @@ const Login = () => {
                     />
                 </FormControl>
 
-                <Button variant="contained" sx={{ width: '320px', backgroundColor: '#344A9A', color: "#fff", mt: 3, height: '50px' }}>Continue</Button>
+                <Button onClick={onsubmit} variant="contained" sx={{ width: '320px', backgroundColor: '#344A9A', color: "#fff", mt: 3, height: '50px' }}>Continue</Button>
 
                 <Box sx={{ mt: 3 }} className='no-account-text'>Don't have an account?  Sign up</Box>
 
